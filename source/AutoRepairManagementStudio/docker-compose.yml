@@ -1,0 +1,36 @@
+services:
+  autorepairmanagementstudio.web:
+    image: ${DOCKER_REGISTRY-}autorepairmanagementstudioweb
+    container_name: autorepairmanagementstudio_web
+    build:
+      context: .
+      dockerfile: AutoRepairManagementStudio.Web/Dockerfile
+  autorepairmanagementstudio.database:
+    image: postgres:latest
+    container_name: autorepairmanagementstudio_database
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=autorepairmanagementstudio
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin4
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    depends_on:
+      - autorepairmanagementstudio.database
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  pgdata:
+  pgadmin-data:
