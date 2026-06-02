@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: AutoRepairManagementStudio.Web/Dockerfile
   autorepairmanagementstudio.database:
-    image: postgres:latest
+    image: postgres:18
     container_name: autorepairmanagementstudio_database
     ports:
       - "5432:5432"
@@ -16,7 +16,8 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=autorepairmanagementstudio
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - C:\Users\Jacob\source\vargo3\AutoRepairShop\source\AutoRepairManagementStudio\init-db:/docker-entrypoint-initdb.d
+      # - pgdata:/var/lib/postgresql/data
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: pgadmin4
@@ -32,5 +33,5 @@ services:
       - pgadmin-data:/var/lib/pgadmin
 
 volumes:
-  pgdata:
+  # pgdata:
   pgadmin-data:

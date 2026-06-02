@@ -14,5 +14,7 @@
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
+    <None Include="init-db\000_tables.sql" />
+    <None Include="init-db\900_seed.sql" />
   </ItemGroup>
 </Project>

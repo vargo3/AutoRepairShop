@@ -1,7 +1,7 @@
-﻿using AutoRepairManagementStudio.DataAccessLayer.Database.Entities;
+﻿using AutoRepairManagementStudio.DataAccessLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace AutoRepairManagementStudio.DataAccessLayer.Database
+namespace AutoRepairManagementStudio.DataAccessLayer
 {
     public sealed class AutoRepairContext : DbContext
     {
@@ -10,7 +10,8 @@ namespace AutoRepairManagementStudio.DataAccessLayer.Database
         {
         }
 
-        public DbSet<App_User> Users { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<CfgSetting> CfgSetting { get; set; }
 
         public void onconfiguring(DbContextOptionsBuilder optionsBuilder)
         {

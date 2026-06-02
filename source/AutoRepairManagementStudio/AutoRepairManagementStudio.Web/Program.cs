@@ -1,4 +1,5 @@
-using AutoRepairManagementStudio.DataAccessLayer.Database;
+using AutoRepairManagementStudio.DataAccessLayer;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,14 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 // Register your context with the built-in DI container
 builder.Services.AddDbContext<AutoRepairContext>(options => options.UseNpgsql(connectionString));
+
+// Add Cookie Authentication services
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login/Index"; // Where to redirect unauthenticated users
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    });
 
 var app = builder.Build();
 

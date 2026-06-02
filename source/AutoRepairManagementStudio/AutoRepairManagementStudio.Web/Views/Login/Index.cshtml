@@ -1,0 +1,42 @@
+﻿@model AutoRepairManagementStudio.Web.Models.LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <h1 class="display-4">Welcome</h1>
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.Username, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
+        </span>
+    </div>
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.Password, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+        </span>
+    </div>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div>
+            <span>@ViewBag.ErrorMessage</span>
+        </div>
+    }
+
+    <button type="submit" class="btn btn-dark">Sign In</button>
+}
