@@ -1,4 +1,5 @@
 ﻿using AutoRepairManagementStudio.DataAccessLayer.Entities;
+using AutoRepairManagementStudio.DataAccessLayer.ViewEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace AutoRepairManagementStudio.DataAccessLayer
@@ -10,17 +11,26 @@ namespace AutoRepairManagementStudio.DataAccessLayer
         {
         }
 
-        public DbSet<Account> AppUsers { get; set; }
+        #region Cfg Tables
         public DbSet<CfgSetting> CfgSettings { get; set; }
+        public DbSet<CfgStatus> CfgStatuses { get; set; }
+        #endregion Cfg Tables
 
-        public void onconfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                // Fallback to a default connection string if not configured
-                optionsBuilder.UseNpgsql("Host=localhost;Database=AutoRepairDB;Username=postgres;Password=yourpassword");
-            }
-        }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<WorkOrder> WorkOrders { get; set; }
+        public DbSet<WorkOrderExpense> WorkOrderExpenses { get; set; }
+
+        #region Views
+        public DbSet<ActiveWorkOrder> ActiveWorkOrders { get; set; }
+        #endregion Views
+
+        //public override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //    }
+        //}
 
     }
 }

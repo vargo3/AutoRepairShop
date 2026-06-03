@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace AutoRepairManagementStudio.Web.Models
+namespace AutoRepairManagementStudio.Web.Models.Account
 {
-    public class LoginModel
+    public class AccountModel
     {
 
         [Display(Name = "User Name")]

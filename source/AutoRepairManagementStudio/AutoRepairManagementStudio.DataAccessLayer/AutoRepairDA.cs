@@ -1,4 +1,5 @@
 ﻿using AutoRepairManagementStudio.DataAccessLayer.Entities;
+using AutoRepairManagementStudio.DataAccessLayer.ViewEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace AutoRepairManagementStudio.DataAccessLayer
@@ -12,15 +13,20 @@ namespace AutoRepairManagementStudio.DataAccessLayer
 
         protected AutoRepairContext Context { get; set; }
 
-        #region AppUser
-        public Account? GetAppUserByUsername(string username)
+
+        #region CfgSetting
+
+        #endregion CfgSetting
+
+        #region Account
+        public Account? GetAccountByUsername(string username)
         {
-            return Context.AppUsers.FirstOrDefault(u => u.username == username);
+            return Context.Accounts.FirstOrDefault(u => u.username == username);
         }
 
-        public void AppUserFailedLogin(int userId)
+        public void AccountFailedLogin(int AccountId)
         {
-            Account? user = Context.AppUsers.FirstOrDefault(u => u.account_id == userId);
+            Account? user = Context.Accounts.FirstOrDefault(u => u.account_id == AccountId);
             if (user == null) return;
 
             CfgSetting? setting = Context.CfgSettings.FirstOrDefault(u => u.name == "account lockout threshold");
@@ -37,17 +43,21 @@ namespace AutoRepairManagementStudio.DataAccessLayer
             }
             Context.SaveChanges();
         }
+        #endregion Account
 
-        //public void AppUserUpdate(int userId)
-        //{
-        //    AppUser? user = Context.AppUsers.FirstOrDefault(u => u.account_id == userId);
-        //    if (user == null) return;
-        //    Context.SaveChanges();
-        //}
-        #endregion AppUser
+        #region Vehicle
+        public List<Vehicle> GetAllVehiclesByAccountId(int AccountId)
+        {
+            return Context.Vehicles.Where(x => x.account_id == AccountId).ToList();
+        }
+        #endregion Vehicle
 
-        #region CfgSetting
+        #region WorkOrder
+        public List<ActiveWorkOrder> GetAllActiveWorkOrders()
+        {
+            return Context.ActiveWorkOrders.ToList();
+        }
+        #endregion WorkOrder
 
-        #endregion CfgSetting
     }
 }

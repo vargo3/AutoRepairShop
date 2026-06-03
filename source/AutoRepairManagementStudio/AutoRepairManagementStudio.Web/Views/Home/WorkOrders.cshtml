@@ -1,0 +1,28 @@
+﻿@model AutoRepairManagementStudio.Web.Models.Home.WorkOrderGridModel
+
+@{
+    ViewData["Title"] = "Work Orders";
+}
+
+
+<div id="WorkOrders">
+    <table>
+        <thead>
+            <tr>
+                <th>Account</th>
+                <th>Vehicle</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var workOrder in Model.WorkOrders)
+            {
+                <tr>
+                    <td>@workOrder.account_name</td>
+                    <td>@workOrder.vechicle_year @workOrder.vechicle_make @workOrder.vechicle_model</td>
+                    <td>@workOrder.status_description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,5 +1,6 @@
 using AutoRepairManagementStudio.DataAccessLayer;
 using AutoRepairManagementStudio.Web.Models;
+using AutoRepairManagementStudio.Web.Models.Account;
 using AutoRepairManagementStudio.Web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -10,6 +11,7 @@ using System.Security.Claims;
 
 namespace AutoRepairManagementStudio.Web.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         public AccountController(AutoRepairContext context)
@@ -22,13 +24,16 @@ namespace AutoRepairManagementStudio.Web.Controllers
         #endregion Data Members
 
 
+        #region Auth methods
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View("~/Views/Account/Login.cshtml");
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginModel model)
         {
             string? errorMessage = service.ValidateLogin(model);
@@ -48,17 +53,29 @@ namespace AutoRepairManagementStudio.Web.Controllers
                 // Issue the cookie
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                return RedirectToAction("Home", "Home");
+                return RedirectToAction("Index", "Home");
             }
         }
 
-        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Account");
         }
+        #endregion Auth methods
 
+        /// <summary>
+        /// Account profile page, with options to change password, view associated vehicles, view open work orders, etc. (not fully implemented yet)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View("~/Views/Account/Index.cshtml");
+        }
+
+
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
