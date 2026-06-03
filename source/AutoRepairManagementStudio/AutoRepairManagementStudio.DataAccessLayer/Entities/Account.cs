@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AutoRepairManagementStudio.DataAccessLayer.Entities
 {
-    [Table("app_user")]
+    [Table("account")]
     [Index(nameof(username), IsUnique = true)]
     [Index(nameof(email), IsUnique = true)]
-    public class AppUser
+    public class Account
     {
         [Key]
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int app_user_id { get; set; }
+        public int account_id { get; set; }
 
         [Required]
         public DateTimeOffset created_at { get; set; }

@@ -17,5 +17,8 @@ This is a coding exercise. This is a application built to handle the internal tr
 	* Using EF Core for database CRUD interactions because it provides a robust and maintainable codebase.
 	* Using Razor Pages for the frontend to have a more seamless integration with the backend logic.
 	* Including Postgre db in the same docker image as the web service to ensure that the application can be easily tested without additional setup steps. In a real-world scenario, I would maintain the database separately from the application to allow for more flexibility and scalability long-term.
+	* Using simple cookie-based user authentication to cut down complexity and development time. In a real-world scenario, I would implement more rigorous authentication.
 	* 
 * What you would add or change if you had more time
+	* add vehicle ownership log to better track when ownership could change
+	* 

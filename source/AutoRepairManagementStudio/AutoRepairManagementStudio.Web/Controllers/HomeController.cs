@@ -18,7 +18,7 @@ namespace AutoRepairManagementStudio.Web.Controllers
         #endregion Data Members
 
 
-        public IActionResult Index()
+        public IActionResult Home()
         {
             return View();
         }

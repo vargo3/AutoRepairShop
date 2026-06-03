@@ -6,9 +6,9 @@ using System.Diagnostics;
 
 namespace AutoRepairManagementStudio.Web.Services
 {
-    public class LoginService
+    public class AccountService
     {
-        public LoginService(AutoRepairContext context)
+        public AccountService(AutoRepairContext context)
         {
             DataAccess = new AutoRepairDA(context);
         }
@@ -30,14 +30,14 @@ namespace AutoRepairManagementStudio.Web.Services
                 return "Username and password are required.";
             }
 
-            AppUser? user = DataAccess.GetAppUserByUsername(model.Username);
+            Account? user = DataAccess.GetAppUserByUsername(model.Username);
             if (user == null)
             {
                 return "Username and Password not found.";
             }
             else if (user.password_hash != null && user.password_hash != model.Password)
             {
-                if (user != null) DataAccess.AppUserFailedLogin(user.app_user_id);
+                if (user != null) DataAccess.AppUserFailedLogin(user.account_id);
 
                 return "Username and Password not found.";
             }

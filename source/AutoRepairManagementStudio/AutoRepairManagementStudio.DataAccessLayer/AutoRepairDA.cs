@@ -13,18 +13,24 @@ namespace AutoRepairManagementStudio.DataAccessLayer
         protected AutoRepairContext Context { get; set; }
 
         #region AppUser
-        public AppUser? GetAppUserByUsername(string username)
+        public Account? GetAppUserByUsername(string username)
         {
             return Context.AppUsers.FirstOrDefault(u => u.username == username);
         }
 
         public void AppUserFailedLogin(int userId)
         {
-            var user = Context.AppUsers.FirstOrDefault(u => u.app_user_id == userId);
+            Account? user = Context.AppUsers.FirstOrDefault(u => u.account_id == userId);
             if (user == null) return;
 
+            CfgSetting? setting = Context.CfgSettings.FirstOrDefault(u => u.name == "account lockout threshold");
+            if (int.TryParse(setting?.value, out int attemptThreshold) == false)
+            {
+                attemptThreshold = 5; //default
+            }
+
             user.password_attempt_count += 1;
-            if (user.password_attempt_count >= 5) // 5 attempts before lockout. This threshold can be adjusted as needed.
+            if (user.password_attempt_count >= attemptThreshold) // Assuming 5 attempts before lockout
             {
                 user.is_locked = true;
                 user.locked_at = DateTimeOffset.UtcNow;
@@ -32,20 +38,12 @@ namespace AutoRepairManagementStudio.DataAccessLayer
             Context.SaveChanges();
         }
 
-        public void AppUserUpdate(int userId)
-        {
-            var user = Context.AppUsers.FirstOrDefault(u => u.app_user_id == userId);
-            if (user != null)
-            {
-                user.password_attempt_count += 1;
-                if (user.password_attempt_count >= 5) // Assuming 5 attempts before lockout
-                {
-                    user.is_locked = true;
-                    user.locked_at = DateTimeOffset.UtcNow;
-                }
-                Context.SaveChanges();
-            }
-        }
+        //public void AppUserUpdate(int userId)
+        //{
+        //    AppUser? user = Context.AppUsers.FirstOrDefault(u => u.account_id == userId);
+        //    if (user == null) return;
+        //    Context.SaveChanges();
+        //}
         #endregion AppUser
 
         #region CfgSetting

@@ -17,7 +17,7 @@ builder.Services.AddDbContext<AutoRepairContext>(options => options.UseNpgsql(co
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Login/Index"; // Where to redirect unauthenticated users
+        options.LoginPath = "/Account/Login"; // Where to redirect unauthenticated users
         options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     });
 
@@ -40,7 +40,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Home}/{action=Home}/{id?}")
     .WithStaticAssets();
 
 

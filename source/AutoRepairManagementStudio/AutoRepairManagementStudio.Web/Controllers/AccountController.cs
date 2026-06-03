@@ -10,22 +10,22 @@ using System.Security.Claims;
 
 namespace AutoRepairManagementStudio.Web.Controllers
 {
-    public class LoginController : Controller
+    public class AccountController : Controller
     {
-        public LoginController(AutoRepairContext context)
+        public AccountController(AutoRepairContext context)
         {
-            service = new LoginService(context);
+            service = new AccountService(context);
         }
 
         #region Data Members
-        private LoginService service { get; }
+        private AccountService service { get; }
         #endregion Data Members
 
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Login()
         {
-            return View("~/Views/Login/Index.cshtml");
+            return View("~/Views/Account/Login.cshtml");
         }
 
         [HttpPost]
@@ -37,7 +37,7 @@ namespace AutoRepairManagementStudio.Web.Controllers
             {
                 ViewBag.ErrorMessage = errorMessage;
                 //ModelState.AddModelError("", "Invalid credentials.");
-                return Index();
+                return Login();
             }
             else //pass auth
             {
@@ -48,7 +48,7 @@ namespace AutoRepairManagementStudio.Web.Controllers
                 // Issue the cookie
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "Home");
             }
         }
 
@@ -56,7 +56,7 @@ namespace AutoRepairManagementStudio.Web.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Login", "Account");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -64,5 +64,6 @@ namespace AutoRepairManagementStudio.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

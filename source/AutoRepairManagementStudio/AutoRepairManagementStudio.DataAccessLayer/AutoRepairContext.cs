@@ -10,8 +10,8 @@ namespace AutoRepairManagementStudio.DataAccessLayer
         {
         }
 
-        public DbSet<AppUser> AppUsers { get; set; }
-        public DbSet<CfgSetting> CfgSetting { get; set; }
+        public DbSet<Account> AppUsers { get; set; }
+        public DbSet<CfgSetting> CfgSettings { get; set; }
 
         public void onconfiguring(DbContextOptionsBuilder optionsBuilder)
         {
