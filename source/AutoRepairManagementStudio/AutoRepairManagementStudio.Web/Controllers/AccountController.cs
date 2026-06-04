@@ -47,8 +47,11 @@ namespace AutoRepairManagementStudio.Web.Controllers
             else //pass auth
             {
                 // Build the user identity info
-                var claims = new List<Claim> { new Claim(ClaimTypes.Name, model.Username) };
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var claims = new List<Claim> {
+                    new Claim(ClaimTypes.Name, model.Username),
+                    //new Claim(ClaimTypes.NameIdentifier, "1"),
+                };
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 // Issue the cookie
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));

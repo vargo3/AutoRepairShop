@@ -25,4 +25,7 @@ This is a coding exercise. This is a application built to handle the internal tr
 	* expand account roles with permission controls. ex: allow customers to have view-only access to their own data.
 	* Unit tests
 	* I would take more time to refine the UI and UX
-	* 
+	* use async methods instead of the serial versions to improve scalability
+	* use caching to reduce redundant db calls
+	* add more data validations for UI form submissions
+	

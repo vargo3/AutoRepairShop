@@ -22,7 +22,7 @@ namespace AutoRepairManagementStudio.DataAccessLayer
         public DbSet<WorkOrderExpense> WorkOrderExpenses { get; set; }
 
         #region Views
-        public DbSet<ActiveWorkOrder> ActiveWorkOrders { get; set; }
+        public DbSet<WorkOrderView> WorkOrderViews { get; set; }
         #endregion Views
 
         //public override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

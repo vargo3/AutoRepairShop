@@ -14,11 +14,19 @@ namespace AutoRepairManagementStudio.DataAccessLayer
         protected AutoRepairContext Context { get; set; }
 
 
-        #region CfgSetting
-
-        #endregion CfgSetting
+        #region Cfg
+        public CfgStatus[] GetAllCfgStatuses()
+        {
+            return Context.CfgStatuses.OrderBy(x => x.display_order).ToArray();
+        }
+        #endregion Cfg
 
         #region Account
+        public Account? GetAccount(int? account_id)
+        {
+            return Context.Accounts.Find(account_id);
+        }
+
         public Account? GetAccountByUsername(string username)
         {
             return Context.Accounts.FirstOrDefault(u => u.username == username);
@@ -46,16 +54,56 @@ namespace AutoRepairManagementStudio.DataAccessLayer
         #endregion Account
 
         #region Vehicle
-        public List<Vehicle> GetAllVehiclesByAccountId(int AccountId)
+        public Vehicle? GetVehicle(int? vehicle_id)
         {
-            return Context.Vehicles.Where(x => x.account_id == AccountId).ToList();
+            return Context.Vehicles.Find(vehicle_id);
+        }
+
+        public List<Vehicle> GetAllVehiclesByAccountId(int? account_id)
+        {
+            return Context.Vehicles.Where(x => x.account_id == account_id).ToList();
         }
         #endregion Vehicle
 
         #region WorkOrder
-        public List<ActiveWorkOrder> GetAllActiveWorkOrders()
+        public WorkOrderView[] GetAllActiveWorkOrders()
         {
-            return Context.ActiveWorkOrders.ToList();
+            return Context.WorkOrderViews.Where(x => x.status_description != "Completed" && x.status_description != "Canceled").ToArray();
+        }
+
+        public WorkOrderView? GetWorkOrderView(int? work_order_id)
+        {
+            return Context.WorkOrderViews.Find(work_order_id);
+        }
+
+        public WorkOrder? GetWorkOrder(int? work_order_id)
+        {
+            return Context.WorkOrders.Find(work_order_id);
+        }
+
+        public void UpdateWorkOrder(int work_order_id, int userId, int account_id, int vehicle_id, int cfg_status_id, string? description, string? notes)
+        {
+            WorkOrder? entity = Context.WorkOrders.Find(work_order_id);
+
+            entity ??= new WorkOrder
+            {
+                created_at = DateTimeOffset.UtcNow,
+                created_by = userId,
+                vehicle_id = vehicle_id, // Only set vehicle_id on new work orders. Existing work orders should never override vehicle_id.
+            };
+
+            entity.updated_at = DateTimeOffset.UtcNow;
+            entity.updated_by = userId;
+            entity.account_id = account_id;
+            entity.cfg_status_id = cfg_status_id;
+            entity.description = description;
+            entity.notes = notes;
+
+            if (entity.work_order_id == 0)
+                Context.WorkOrders.Add(entity);
+            else
+                Context.WorkOrders.Update(entity);
+            Context.SaveChanges();
         }
         #endregion WorkOrder
 

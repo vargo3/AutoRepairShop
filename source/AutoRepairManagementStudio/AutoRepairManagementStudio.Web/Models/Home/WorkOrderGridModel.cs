@@ -4,6 +4,6 @@ namespace AutoRepairManagementStudio.Web.Models.Home
 {
     public class WorkOrderGridModel
     {
-        public List<ActiveWorkOrder> WorkOrders { get; set; } = new List<ActiveWorkOrder>();
+        public WorkOrderView[] WorkOrders { get; set; } = Array.Empty<WorkOrderView>();
     }
 }

@@ -1,0 +1,77 @@
+﻿@model AutoRepairManagementStudio.Web.Models.WorkOrder.WorkOrderModel
+
+@{
+    ViewData["Title"] = "Work Order";
+}
+
+
+@using (Html.BeginForm("SaveProfile", "WorkOrder", FormMethod.Post, new { @id = "WorkOrderProfile" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.created_at, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.TextBoxFor(model => model.created_at, "{0:MM/dd/yyyy}", new { @class = "form-control", @readonly = "" })
+        </span>
+    </div>
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.account_name, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.TextBoxFor(model => model.account_name, new { @class = "form-control", @readonly = "" })
+            @Html.HiddenFor(model => model.account_id)
+        </span>
+    </div>
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.vehicle_description, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.TextBoxFor(model => model.vehicle_description, new { @class = "form-control", @readonly = "" })
+            @Html.HiddenFor(model => model.vehicle_id)
+        </span>
+    </div>
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.status_description, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.DropDownListFor(model => model.cfg_status_id, Model.CfgStatuses, "Select", new { @class = "form-control" })
+        </span>
+    </div>
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.description, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.TextBoxFor(model => model.description, new { @class = "form-control" })
+        </span>
+    </div>
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.notes, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.TextBoxFor(model => model.notes, new { @class = "form-control" })
+        </span>
+    </div>
+
+    @Html.HiddenFor(model => model.work_order_id)
+
+    <button type="submit" class="btn btn-dark">Save</button>
+}

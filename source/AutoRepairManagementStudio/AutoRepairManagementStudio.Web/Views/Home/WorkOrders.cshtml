@@ -12,15 +12,17 @@
                 <th>Account</th>
                 <th>Vehicle</th>
                 <th>Status</th>
+                <th>Created</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var workOrder in Model.WorkOrders)
             {
-                <tr>
+                <tr onclick="window.location.href='@Url.Action("Index", "WorkOrder", new { id = workOrder.work_order_id})'">
                     <td>@workOrder.account_name</td>
-                    <td>@workOrder.vechicle_year @workOrder.vechicle_make @workOrder.vechicle_model</td>
+                    <td>@workOrder.vehicle_description</td>
                     <td>@workOrder.status_description</td>
+                    <td>@workOrder.created_at.ToString()</td>
                 </tr>
             }
         </tbody>

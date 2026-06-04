@@ -24,7 +24,7 @@ namespace AutoRepairManagementStudio.Web.Services
         {
             WorkOrderGridModel model = new WorkOrderGridModel();
 
-            List<ActiveWorkOrder> WorkOrders = DataAccess.GetAllActiveWorkOrders();
+            WorkOrderView[] WorkOrders = DataAccess.GetAllActiveWorkOrders();
             model.WorkOrders = WorkOrders;
 
             return model;
