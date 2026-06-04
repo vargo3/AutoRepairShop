@@ -4,34 +4,34 @@ values('account lockout threshold', '5');
 
 
 ----seed cfg_user_role
-insert into cfg_user_role(cfg_user_role_id, name, is_active)
-values(1, 'Admin', TRUE);
+insert into cfg_user_role(name, is_active)
+values('Admin', TRUE);
 
-insert into cfg_user_role(cfg_user_role_id, name, is_active)
-values(2, 'Service Writer', TRUE);
+insert into cfg_user_role(name, is_active)
+values('Service Writer', TRUE);
 
-insert into cfg_user_role(cfg_user_role_id, name, is_active)
-values(3, 'Mechanic', TRUE);
+insert into cfg_user_role(name, is_active)
+values('Mechanic', TRUE);
 
-insert into cfg_user_role(cfg_user_role_id, name, is_active)
-values(4, 'Customer', TRUE);
+insert into cfg_user_role(name, is_active)
+values('Customer', TRUE);
 
 
 ----seed cfg_status
-insert into cfg_status(cfg_status_id, description, display_order)
-values(1, 'Pending', 1);
+insert into cfg_status(description, display_order)
+values('Pending', 1);
 
-insert into cfg_status(cfg_status_id, description, display_order)
-values(2, 'In Progress', 2);
+insert into cfg_status(description, display_order)
+values('In Progress', 2);
 
-insert into cfg_status(cfg_status_id, description, display_order)
-values(3, 'On Hold', 3);
+insert into cfg_status(description, display_order)
+values('On Hold', 3);
 
-insert into cfg_status(cfg_status_id, description, display_order)
-values(4, 'Completed', 4);
+insert into cfg_status(description, display_order)
+values('Completed', 4);
 
-insert into cfg_status(cfg_status_id, description, display_order)
-values(5, 'Canceled', 5);
+insert into cfg_status(description, display_order)
+values('Canceled', 5);
 
 
 ----seed cfg_vehicle_model
@@ -64,17 +64,17 @@ values('Kia', 'Carnival');
 
 
 ----seed account
-insert into account(account_id, created_by, updated_by, first_name, last_name, is_active, username, password_hash, cfg_user_role_id)
-values(1, 1, 1, 'Admin', 'User', TRUE, 'admin', 'admin', 1);
+insert into account(created_by, updated_by, first_name, last_name, is_active, username, password_hash, cfg_user_role_id)
+values(1, 1, 'Admin', 'User', TRUE, 'admin', 'admin', 1);
 
-insert into account(account_id, created_by, updated_by, first_name, last_name, is_active, username, password_hash, cfg_user_role_id)
-values(2, 1, 1, 'Seth', 'McFarland', TRUE, 'sfarl', 'password', 2);
+insert into account(created_by, updated_by, first_name, last_name, is_active, username, password_hash, cfg_user_role_id)
+values(1, 1, 'Seth', 'McFarland', TRUE, 'sfarl', 'password', 2);
 
-insert into account(account_id, created_by, updated_by, first_name, last_name, is_active, username, password_hash, cfg_user_role_id)
-values(3, 1, 1, 'Jared', 'Kirkland', TRUE, 'jkirk', 'password', 3);
+insert into account(created_by, updated_by, first_name, last_name, is_active, username, password_hash, cfg_user_role_id)
+values(1, 1, 'Jared', 'Kirkland', TRUE, 'jkirk', 'password', 3);
 
-insert into account(account_id, created_by, updated_by, first_name, last_name, is_active, username, password_hash, cfg_user_role_id)
-values(4, 1, 1, 'Jacob', 'Vargo', TRUE, 'jvarg', 'password', 4);
+insert into account(created_by, updated_by, first_name, last_name, is_active, username, password_hash, cfg_user_role_id)
+values(1, 1, 'Jacob', 'Vargo', TRUE, 'jvarg', 'password', 4);
 
 
 ----seed vehicle
