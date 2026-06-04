@@ -5,7 +5,7 @@
 }
 
 
-<div id="WorkOrders">
+<div id="WorkOrdersGrid">
     <table>
         <thead>
             <tr>
@@ -22,7 +22,7 @@
                     <td>@workOrder.account_name</td>
                     <td>@workOrder.vehicle_description</td>
                     <td>@workOrder.status_description</td>
-                    <td>@workOrder.created_at.ToString()</td>
+                    <td>@workOrder.created_at.LocalDateTime.ToShortDateString()</td>
                 </tr>
             }
         </tbody>

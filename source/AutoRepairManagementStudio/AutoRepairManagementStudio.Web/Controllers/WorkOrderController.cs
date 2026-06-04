@@ -33,9 +33,9 @@ namespace AutoRepairManagementStudio.Web.Controllers
 
         public IActionResult SaveProfile(WorkOrderModel model)
         {
-            service.SaveProfile(model);
+            int work_order_id = service.SaveProfile(model);
 
-            return RedirectToAction("Index", "WorkOrder", new { id = model.work_order_id });
+            return RedirectToAction("Index", "WorkOrder", new { id = work_order_id });
         }
     }
 }

@@ -1,8 +1,29 @@
-﻿@{
+﻿@model AutoRepairManagementStudio.Web.Models.Home.AccountGridModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div id="AccountsGrid">
+    <a class="btn btn-dark" href="@Url.Action("Index", "Account")">New</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Account</th>
+                <th>Is Active</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model.Accounts)
+            {
+                <tr onclick="window.location.href='@Url.Action("Index", "Account", new { id = row.account_id })'">
+                    <td>@row.first_name @row.last_name</td>
+                    <td>@row.is_active</td>
+                    <td>@row.phone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

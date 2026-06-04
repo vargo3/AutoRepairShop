@@ -51,6 +51,43 @@ namespace AutoRepairManagementStudio.DataAccessLayer
             }
             Context.SaveChanges();
         }
+
+        public Account[] GetAllAccounts()
+        {
+            return Context.Accounts.ToArray();
+        }
+
+        public Account UpdateAccount(int account_id, int userId, string first_name, string last_name, string username, string? password_hash, bool is_active, string? phone, string? email)
+        {
+            Account? entity = Context.Accounts.Find(account_id);
+
+            entity ??= new Account
+            {
+                created_at = DateTimeOffset.UtcNow,
+                created_by = userId,
+                first_name = first_name,
+                last_name = last_name,
+                username = username,
+            };
+
+            entity.updated_at = DateTimeOffset.UtcNow;
+            entity.updated_by = userId;
+            entity.first_name = first_name;
+            entity.last_name = last_name;
+            entity.username = username;
+            if (password_hash != null && password_hash.IsWhiteSpace() == false) entity.password_hash = password_hash;
+            entity.is_active = is_active;
+            entity.phone = phone;
+            entity.email = email;
+
+            if (entity.account_id == 0)
+                Context.Accounts.Add(entity);
+            else
+                Context.Accounts.Update(entity);
+            Context.SaveChanges();
+
+            return entity;
+        }
         #endregion Account
 
         #region Vehicle
@@ -81,7 +118,7 @@ namespace AutoRepairManagementStudio.DataAccessLayer
             return Context.WorkOrders.Find(work_order_id);
         }
 
-        public void UpdateWorkOrder(int work_order_id, int userId, int account_id, int vehicle_id, int cfg_status_id, string? description, string? notes)
+        public WorkOrder UpdateWorkOrder(int work_order_id, int userId, int account_id, int vehicle_id, int cfg_status_id, string? description, string? notes)
         {
             WorkOrder? entity = Context.WorkOrders.Find(work_order_id);
 
@@ -104,6 +141,8 @@ namespace AutoRepairManagementStudio.DataAccessLayer
             else
                 Context.WorkOrders.Update(entity);
             Context.SaveChanges();
+
+            return entity;
         }
         #endregion WorkOrder
 

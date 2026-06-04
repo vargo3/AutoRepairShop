@@ -50,9 +50,10 @@ namespace AutoRepairManagementStudio.Web.Services
             return model;
         }
 
-        public void SaveProfile(WorkOrderModel model)
+        public int SaveProfile(WorkOrderModel model)
         {
-            DataAccess.UpdateWorkOrder(model.work_order_id, userId, model.account_id, model.vehicle_id, model.cfg_status_id, model.description, model.notes);
+            WorkOrder order = DataAccess.UpdateWorkOrder(model.work_order_id, userId, model.account_id, model.vehicle_id, model.cfg_status_id, model.description, model.notes);
+            return order.work_order_id;
         }
 
     }

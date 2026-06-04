@@ -16,11 +16,15 @@ namespace AutoRepairManagementStudio.Web.Controllers
     {
         public AccountController(AutoRepairContext context)
         {
-            service = new AccountService(context);
+            //userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            userId = 1; //TODO: Remove hardcoded userId and get from auth context once auth is implemented
+
+            service = new AccountService(context, userId);
         }
 
         #region Data Members
         private AccountService service { get; }
+        private int? userId { get; }
         #endregion Data Members
 
 
@@ -72,9 +76,18 @@ namespace AutoRepairManagementStudio.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int? id)
         {
-            return View("~/Views/Account/Index.cshtml");
+            AccountModel model = service.GetAccount(id);
+
+            return View("~/Views/Account/AccountProfile.cshtml", model);
+        }
+
+        public IActionResult SaveProfile(AccountModel model)
+        {
+            int account_id = service.SaveProfile(model);
+
+            return RedirectToAction("Index", "Account", new { id = account_id });
         }
 
 

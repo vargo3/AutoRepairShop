@@ -1,0 +1,86 @@
+﻿@model AutoRepairManagementStudio.Web.Models.Account.AccountModel
+
+@{
+    ViewData["Title"] = "Account";
+}
+
+
+@using (Html.BeginForm("SaveProfile", "Account", FormMethod.Post, new { @id = "AccountProfile" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.first_name, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.TextBoxFor(model => model.first_name, new { @class = "form-control" })
+        </span>
+    </div>
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.last_name, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.TextBoxFor(model => model.last_name, new { @class = "form-control" })
+        </span>
+    </div>
+    
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.username, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.TextBoxFor(model => model.username, new { @class = "form-control" })
+        </span>
+    </div>
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.password_hash, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.TextBoxFor(model => model.password_hash, new { @class = "form-control" })
+        </span>
+    </div>
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.is_active, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.CheckBoxFor(model => model.is_active)
+        </span>
+    </div>
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.phone, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.TextBoxFor(model => model.phone, new { @class = "form-control" })
+        </span>
+    </div>
+
+    <div class="row m-3">
+        <span class="col-3 align-content-center">
+            @Html.LabelFor(model => model.email, new { @class = "control-label" })
+        </span>
+
+        <span class="col-9 align-content-center">
+            @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
+        </span>
+    </div>
+
+    @Html.HiddenFor(model => model.account_id)
+    @Html.HiddenFor(model => model.cfg_user_role_id)
+
+    <button type="submit" class="btn btn-dark">Save</button>
+}
