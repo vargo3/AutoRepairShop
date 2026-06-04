@@ -19,6 +19,11 @@ namespace AutoRepairManagementStudio.DataAccessLayer
         {
             return Context.CfgStatuses.OrderBy(x => x.display_order).ToArray();
         }
+
+        public CfgVehicleModel[] GetAllCfgVehicleModels()
+        {
+            return Context.CfgVehicleModels.OrderBy(x => x.make).ThenBy(x => x.model).ToArray();
+        }
         #endregion Cfg
 
         #region Account
@@ -54,7 +59,7 @@ namespace AutoRepairManagementStudio.DataAccessLayer
 
         public Account[] GetAllAccounts()
         {
-            return Context.Accounts.ToArray();
+            return Context.Accounts.OrderBy(x => x.first_name).ThenBy(x => x.last_name).ToArray();
         }
 
         public Account UpdateAccount(int account_id, int userId, string first_name, string last_name, string username, string? password_hash, bool is_active, string? phone, string? email)
@@ -96,9 +101,14 @@ namespace AutoRepairManagementStudio.DataAccessLayer
             return Context.Vehicles.Find(vehicle_id);
         }
 
-        public List<Vehicle> GetAllVehiclesByAccountId(int? account_id)
+        public Vehicle[] GetAllVehicles()
         {
-            return Context.Vehicles.Where(x => x.account_id == account_id).ToList();
+            return Context.Vehicles.ToArray();
+        }
+
+        public Vehicle[] GetAllVehiclesByAccountId(int? account_id)
+        {
+            return Context.Vehicles.Where(x => x.account_id == account_id).ToArray();
         }
         #endregion Vehicle
 

@@ -34,44 +34,33 @@ insert into cfg_status(cfg_status_id, description, display_order)
 values(5, 'Canceled', 5);
 
 
-----seed cfg_make
-insert into cfg_make(cfg_make_id, name)
-values(1, 'Ford');
+----seed cfg_vehicle_model
+insert into cfg_vehicle_model(make, model)
+values('Ford', 'F150');
 
-insert into cfg_make(cfg_make_id, name)
-values(2, 'Chevrolet');
+insert into cfg_vehicle_model(make, model)
+values('Ford', 'F250');
 
-insert into cfg_make(cfg_make_id, name)
-values(3, 'Kia');
+insert into cfg_vehicle_model(make, model)
+values('Ford', 'Focus');
 
+insert into cfg_vehicle_model(make, model)
+values('Chevrolet', 'Colorado');
 
-----seed cfg_model
-insert into cfg_model(cfg_make_id, name)
-values(1, 'F150');
+insert into cfg_vehicle_model(make, model)
+values('Chevrolet', 'Malibu');
 
-insert into cfg_model(cfg_make_id, name)
-values(1, 'F250');
+insert into cfg_vehicle_model(make, model)
+values('Chevrolet', 'Silverado 1500');
 
-insert into cfg_model(cfg_make_id, name)
-values(1, 'Focus');
+insert into cfg_vehicle_model(make, model)
+values('Kia', 'Soul');
 
-insert into cfg_model(cfg_make_id, name)
-values(2, 'Colorado');
+insert into cfg_vehicle_model(make, model)
+values('Kia', 'Sportage');
 
-insert into cfg_model(cfg_make_id, name)
-values(2, 'Malibu');
-
-insert into cfg_model(cfg_make_id, name)
-values(2, 'Silverado 1500');
-
-insert into cfg_model(cfg_make_id, name)
-values(3, 'Soul');
-
-insert into cfg_model(cfg_make_id, name)
-values(3, 'Sportage');
-
-insert into cfg_model(cfg_make_id, name)
-values(3, 'Carnival');
+insert into cfg_vehicle_model(make, model)
+values('Kia', 'Carnival');
 
 
 ----seed account
@@ -89,16 +78,16 @@ values(4, 1, 1, 'Jacob', 'Vargo', TRUE, 'jvarg', 'password', 4);
 
 
 ----seed vehicle
-insert into vehicle(vehicle_id, created_by, updated_by, account_id, cfg_model_id, year, color)
-values(1, 1, 1, 4, 1, 2026, 'Black');
+insert into vehicle(created_by, updated_by, account_id, cfg_vehicle_model_id, year, color)
+values(1, 1, 4, 1, 2026, 'Black');
 
-insert into vehicle(vehicle_id, created_by, updated_by, account_id, cfg_model_id, year, color)
-values(2, 1, 1, 4, 4, 2024, 'Blue');
+insert into vehicle(created_by, updated_by, account_id, cfg_vehicle_model_id, year, color)
+values(1, 1, 4, 4, 2024, 'Blue');
 
 
 ----seed work_order
-insert into work_order(work_order_id, created_by, updated_by, account_id, vehicle_id, cfg_status_id, description)
-values(1, 1, 1, 4, 1, 1, 'Tire Change');
+insert into work_order(created_by, updated_by, account_id, vehicle_id, cfg_status_id, description)
+values(1, 1, 4, 1, 1, 'Tire Change');
 
 
 ----seed work_order_expense

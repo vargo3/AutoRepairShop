@@ -12,13 +12,15 @@ namespace AutoRepairManagementStudio.Web.Models.WorkOrder
         public int work_order_id { get; set; }
 
         [Display(Name = "Created At")]
-        public DateTime created_at { get; set; }
+        public DateTime created_at { get; set; } = DateTime.Now;
 
+        [Display(Name = "Account")]
         public int account_id { get; set; }
 
         /// <summary>
         /// Existing work orders should never override vehicle_id. Use this only for creating new work orders.
         /// </summary>
+        [Display(Name = "Vehicle")]
         public int vehicle_id { get; set; }
 
         public int cfg_status_id { get; set; }
@@ -40,6 +42,8 @@ namespace AutoRepairManagementStudio.Web.Models.WorkOrder
         public string status_description { get; set; } = string.Empty;
 
         public SelectListItem[] CfgStatuses { get; set; } = Array.Empty<SelectListItem>();
+        public SelectListItem[] Accounts { get; set; } = Array.Empty<SelectListItem>();
+        public SelectListItem[] Vehicles { get; set; } = Array.Empty<SelectListItem>();
 
     }
 }

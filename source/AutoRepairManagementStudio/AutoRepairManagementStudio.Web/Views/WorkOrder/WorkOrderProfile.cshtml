@@ -21,23 +21,28 @@
 
     <div class="row m-3">
         <span class="col-3 align-content-center">
-            @Html.LabelFor(model => model.account_name, new { @class = "control-label" })
+            @Html.LabelFor(model => model.account_id, new { @class = "control-label" })
         </span>
 
         <span class="col-9 align-content-center">
-            @Html.TextBoxFor(model => model.account_name, new { @class = "form-control", @readonly = "" })
-            @Html.HiddenFor(model => model.account_id)
+            @Html.DropDownListFor(model => model.account_id, Model.Accounts, "Select", new { @class = "form-control" })
         </span>
     </div>
 
     <div class="row m-3">
         <span class="col-3 align-content-center">
-            @Html.LabelFor(model => model.vehicle_description, new { @class = "control-label" })
+            @Html.LabelFor(model => model.vehicle_id, new { @class = "control-label" })
         </span>
 
         <span class="col-9 align-content-center">
-            @Html.TextBoxFor(model => model.vehicle_description, new { @class = "form-control", @readonly = "" })
-            @Html.HiddenFor(model => model.vehicle_id)
+            @if (Model.work_order_id == 0)
+            {
+                @Html.DropDownListFor(model => model.vehicle_id, Model.Vehicles, "Select", new { @class = "form-control" }) //new work order can edit
+            }
+            else
+            {
+                @Html.TextBoxFor(model => model.vehicle_description, new { @class = "form-control", @readonly = "" })
+            }
         </span>
     </div>
 

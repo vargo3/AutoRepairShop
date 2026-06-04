@@ -30,7 +30,7 @@ namespace AutoRepairManagementStudio.DataAccessLayer.Entities
         public int account_id { get; set; }
 
         [Required]
-        public int cfg_model_id { get; set; }
+        public int cfg_vehicle_model_id { get; set; }
 
         [Required]
         public short year { get; set; }
@@ -39,14 +39,12 @@ namespace AutoRepairManagementStudio.DataAccessLayer.Entities
         [MaxLength(32)]
         public required string color { get; set; }
 
-        [Required]
         [MaxLength(17)]
         [MinLength(17)]
-        public required string vin { get; set; }
+        public string? vin { get; set; }
 
-        [Required]
         [MaxLength(15)]
-        public required string license_plate { get; set; }
+        public string? license_plate { get; set; }
 
     }
 }

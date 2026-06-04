@@ -14,6 +14,7 @@ namespace AutoRepairManagementStudio.DataAccessLayer
         #region Cfg Tables
         public DbSet<CfgSetting> CfgSettings { get; set; }
         public DbSet<CfgStatus> CfgStatuses { get; set; }
+        public DbSet<CfgVehicleModel> CfgVehicleModels { get; set; }
         #endregion Cfg Tables
 
         public DbSet<Account> Accounts { get; set; }
